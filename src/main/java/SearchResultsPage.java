@@ -21,11 +21,6 @@ public class SearchResultsPage {
     public boolean searchWordInTitle(String siteTitle){
         System.out.println("Выполняется поиск слова \"" + siteTitle + "\" в заголовках");
         List<WebElement> links = WebDriver.findElements(By.xpath(".//*[@class='srg']//h3"));
-        for(WebElement link: links){
-            if(link.getText().contains(siteTitle)){
-                return true;
-            }
-        }
-        return false;
+        return links.stream().anyMatch(link -> link.getText().contains(siteTitle));
     }
 }
